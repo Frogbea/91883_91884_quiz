@@ -6,7 +6,7 @@ v3: comp 2 [DONE]
 v4: comp 3 & 7[DONE]
 v5: comp 4 [DONE]
 v6: comp 5 (score) [DONE]
-v7: comp 6 (end text) [DONE]
+v7: comp 6 (end text) [DOING]
 v8: final check [UNDONE]
 author = E.G
 """
@@ -123,30 +123,44 @@ def ans_checker():
 num_min = 0
 num_max = 0
 score = 0
+loop_game = True
 
 
 # main route
-while True:
-    played_before = input('Have you completed this quiz before?').lower()
+while loop_game:
+    while True:
+        played_before = input('Have you completed this quiz before?').lower()
 
-    # if yes skip straight to quiz
-    if played_before == 'yes' or played_before == 'y':
-        print('Welcome back!')
-        break
-    # play instructions if user says no
-    elif played_before == 'no' or played_before == 'n':
-        instructions()
-        break
-    # retry if user inputs something incorrect
-    else:
-        print('error: please type in yes or no')
+        # if yes skip straight to quiz
+        if played_before == 'yes' or played_before == 'y':
+            print('Welcome back!')
+            break
+        # play instructions if user says no
+        elif played_before == 'no' or played_before == 'n':
+            instructions()
+            break
+        # retry if user inputs something incorrect
+        else:
+            print('error: please type in yes or no')
 
-# calls the level function
-player_level()
+    # calls the level function
+    player_level()
 
-# repeats the question 10 times
-for n in range(10):
-    # calls the ans checker function
-    ans_checker()
+    # repeats the question 10 times
+    for n in range(10):
+        # calls the ans checker function
+        ans_checker()
 
-print('your score is:', score, 'out of 10!')
+    print('Well done! Your score is:', score, 'out of 10!')
+    while loop_game:
+        restart = input('Would you like to play this quiz again?').lower()
+        if restart == 'no' or restart == 'n':
+            print('Thank you for playing! I hope you enjoyed :)')
+            loop_game = False
+        elif restart == 'yes' or restart == 'y':
+            print('start quiz again')
+            break
+        else:
+            print('Error: please enter yes or no')
+
+
